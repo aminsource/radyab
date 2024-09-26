@@ -2,7 +2,7 @@
 version: '3'
 services:
   umami:
-    image: ghcr.io/umami-software/umami:postgresql-latest
+    image: tracker:latest
     ports:
       - '5000:3000'
     environment:

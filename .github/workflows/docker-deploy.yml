@@ -1,0 +1,26 @@
+name: Build and Deploy with Docker
+
+on:
+  push:
+    branches:
+      - develop # Trigger this workflow when pushing to the 'develop' branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted # or 'ubuntu-latest' if using GitHub-hosted runners with Docker pre-installed
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Stop the existing Docker container
+      - name: Stop existing container
+        run: docker stop radyab-umami-1 || true
+
+      # Remove the existing Docker container
+      - name: Remove existing container
+        run: docker rm radyab-umami-1 || true
+
+      # Build the Docker image
+      - name: Build Compose
+        run: docker compose up -d
